@@ -1,0 +1,7 @@
+{
+  "name": "FinTrack",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
