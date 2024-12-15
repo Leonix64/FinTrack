@@ -1,0 +1,122 @@
+.categories-content {
+  --background: linear-gradient(135deg, #2b2e33 0%, #1c1e22 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+//   .categories-container {
+//     width: 100%;
+//     max-width: 600px;
+//     padding: 2rem;
+//   }
+
+.custom-header {
+  ion-toolbar {
+    --background: transparent;
+    --color: #f5f5f5;
+  }
+
+  .custom-back-button {
+    --color: #4caf50;
+  }
+
+  .page-title {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #f5f5f5;
+  }
+}
+
+.categories-wrapper {
+  background-color: #1e2025;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  padding: 2.5rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.add-category-button {
+  --background: #4caf50;
+  --background-hover: #388e3c;
+  --background-activate: #2e7d32;
+  --color: white;
+  --border-radius: 8px;
+  text-transform: none;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  margin-bottom: 1.5rem;
+}
+
+.categories-list {
+  background-color: transparent;
+
+  .category-item {
+    --background: #2a2d33;
+    --border-color: #444;
+    --border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid #444;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    ion-label {
+      margin-right: 1rem;
+
+      .category-name {
+        color: #f5f5f5;
+        font-weight: 500;
+      }
+
+      .category-color {
+        color: #aaa;
+        font-size: 0.9rem;
+      }
+    }
+
+    .category-actions {
+      display: flex;
+      gap: 0.5rem;
+
+      .delete-button,
+      .edit-button {
+        --border-radius: 6px;
+        --color: white;
+        text-transform: none;
+        font-size: 0.8rem;
+      }
+
+      .delete-button {
+        --background: #f44336;
+        --background-hover: #d32f2f;
+      }
+
+      .edit-button {
+        --background: #4caf50;
+        --background-hover: #388e3c;
+      }
+    }
+  }
+}
+
+// Optional: Add a subtle hover animation
+@keyframes subtleHover {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

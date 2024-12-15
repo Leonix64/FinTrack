@@ -1,0 +1,37 @@
+<ion-content [fullscreen]="true" class="categories-content">
+  <div class="categories-container">
+    <ion-header class="custom-header">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/home" class="custom-back-button"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="page-title">Categories</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <div class="categories-wrapper">
+      <ion-button expand="block" class="add-category-button">
+        Add New Category
+      </ion-button>
+
+      <ion-list class="categories-list">
+        <ion-item *ngFor="let category of categories" class="category-item">
+          <ion-label>
+            <h2 class="category-name">{{ category.name }}</h2>
+            <p class="category-color" [style.color]="category.color">
+              Color: {{ category.color }}
+            </p>
+          </ion-label>
+          <div class="category-actions">
+            <ion-button (click)="deleteCategory(category.id!)" class="delete-button">
+              Delete
+            </ion-button>
+            <ion-button [routerLink]="['/categories/edit', category.id]" class="edit-button">
+              Update
+            </ion-button>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

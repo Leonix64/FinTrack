@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true" class="edit-category-content">
+  <div class="edit-category-container">
+    <ion-header class="custom-header">
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="/categories" class="custom-back-button"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="page-title">Edit Category</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <div class="edit-category-wrapper">
+      <form [formGroup]="editForm" (ngSubmit)="saveChanges()" class="edit-category-form">
+        <div class="form-group">
+          <ion-item lines="none" class="ion-input">
+            <ion-icon name="create-outline" class="input-icon"></ion-icon>
+            <ion-input type="text" formControlName="name" placeholder="Enter category name" class="custom-input">
+            </ion-input>
+          </ion-item>
+          <div *ngIf="editForm.get('name')?.invalid && editForm.get('name')?.touched" class="error-message">
+            Category name is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <ion-item lines="none" class="ion-input">
+            <ion-icon name="color-palette-outline" class="input-icon"></ion-icon>
+            <ion-input type="color" formControlName="color" placeholder="Pick a color" class="custom-input color-input">
+            </ion-input>
+          </ion-item>
+          <div *ngIf="editForm.get('color')?.invalid && editForm.get('color')?.touched" class="error-message">
+            Color is required
+          </div>
+        </div>
+
+        <ion-button expand="block" type="submit" [disabled]="editForm.invalid" class="save-changes-button">
+          Save Changes
+        </ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>
