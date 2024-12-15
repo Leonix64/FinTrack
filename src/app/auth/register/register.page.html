@@ -1,22 +1,58 @@
-<ion-content [fullscreen]="true">
-  <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
-    <ion-item>
-      <ion-label position="floating">Name</ion-label>
-      <ion-input type="text" formControlName="name" required></ion-input>
-    </ion-item>
+<ion-content [fullscreen]="true" class="register-content">
+  <div class="register-container">
+    <div class="register-form">
+      <h1>Create Your Account</h1>
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <div class="form-group">
+          <ion-item lines="none" class="ion-input">
+            <ion-icon name="person-outline" class="input-icon"></ion-icon>
+            <ion-input type="text" formControlName="name" placeholder="Name" required class="custom-input">
+            </ion-input>
+          </ion-item>
+          <div *ngIf="registerForm.get('name')?.invalid && (registerForm.get('name')?.dirty || registerForm.get('name')?.touched)" class="error-message">
+            Name is required
+          </div>
+        </div>
 
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" formControlName="email" required></ion-input>
-    </ion-item>
+        <div class="form-group">
+          <ion-item lines="none" class="ion-input">
+            <ion-icon name="mail-outline" class="input-icon"></ion-icon>
+            <ion-input type="email" formControlName="email" placeholder="Email" required class="custom-input">
+            </ion-input>
+          </ion-item>
+          <div *ngIf="registerForm.get('email')?.invalid && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)" class="error-message">
+            Please enter a valid email
+          </div>
+        </div>
 
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" formControlName="password" required></ion-input>
-    </ion-item>
+        <div class="form-group">
+          <ion-item lines="none" class="ion-input">
+            <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+            <ion-input type="password" formControlName="password" placeholder="Password" required class="custom-input">
+            </ion-input>
+          </ion-item>
+          <div *ngIf="registerForm.get('password')?.invalid && (registerForm.get('password')?.dirty || registerForm.get('password')?.touched)" class="error-message">
+            Password is required
+          </div>
+        </div>
 
-    <ion-button expand="full" type="submit" [disabled]="!registerForm.valid">
-      Register
-    </ion-button>
-  </form>
+        <ion-button expand="block" type="submit" [disabled]="!registerForm.valid" class="register-button">
+          Register
+        </ion-button>
+
+        <div class="login-link">
+          <ion-text color="medium">
+            Already have an account? <a href="/login">Login</a>
+          </ion-text>
+        </div>
+      </form>
+    </div>
+
+    <!-- Tarjeta de notificación -->
+    <div *ngIf="showSuccessMessage" class="success-card">
+      <ion-icon name="checkmark-circle" class="success-icon"></ion-icon>
+      <p>Registration Successful!</p>
+      <ion-button fill="clear" (click)="dismissSuccessMessage()">OK</ion-button>
+    </div>
+  </div>
 </ion-content>

@@ -12,36 +12,49 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
-  private tokenKey = 'authToken';
+  private tokenKey = 'auth-token';
+  showSuccessMessage = false;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onLogin() {
     if (this.loginForm.valid) {
       const loginData: Login = this.loginForm.value;
       this.authService.login(loginData).subscribe(
         (response) => {
-          this.setToken(response.token); 
+          this.setToken(response.token);
           console.log('Login successful:', response);
-          this.router.navigateByUrl('/home');
+
+          // Mostrar la tarjeta de éxito
+          this.showSuccessMessage = true;
+          setTimeout(() => {
+            this.dismissSuccessMessage();
+            this.router.navigateByUrl('/home');
+          }, 1000);
+        },
+        (error) => {
+          console.error('Login failed:', error);
         }
-      )
+      );
     }
   }
 
   setToken(token: string) {
     localStorage.setItem(this.tokenKey, token);
+  }
+
+  dismissSuccessMessage() {
+    this.showSuccessMessage = false;
   }
 }

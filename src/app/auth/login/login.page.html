@@ -1,17 +1,51 @@
-<ion-content [fullscreen]="true">
-  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" formControlName="email" required></ion-input>
-    </ion-item>
+<ion-content [fullscreen]="true" class="login-content">
+  <div class="login-container">
+    <div class="login-form">
+      <h1>Welcome Back!</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <ion-item lines="none" class="ion-input">
+            <ion-icon name="mail-outline" class="input-icon"></ion-icon>
+            <ion-input type="email" formControlName="email" placeholder="Email" required class="custom-input"></ion-input>
+          </ion-item>
+          <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)" class="error-message">
+            Please enter a valid email
+          </div>
+        </div>
 
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" formControlName="password" required></ion-input>
-    </ion-item>
+        <div class="form-group">
+          <ion-item lines="none" class="ion-input">
+            <ion-icon name="lock-closed-outline" class="input-icon"></ion-icon>
+            <ion-input type="password" formControlName="password" placeholder="Password" required class="custom-input"></ion-input>
+          </ion-item>
+          <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)" class="error-message">
+            Password is required
+          </div>
+        </div>
 
-    <ion-button expand="full" type="submit" [disabled]="!loginForm.valid">
-      Login
-    </ion-button>
-  </form>
+        <div class="forgot-password">
+          <ion-text color="medium">
+            <a href="#">Forgot Password?</a>
+          </ion-text>
+        </div>
+
+        <ion-button expand="block" type="submit" [disabled]="!loginForm.valid" class="login-button">
+          Login
+        </ion-button>
+
+        <div class="signup-link">
+          <ion-text color="medium">
+            Don't have an account? <a href="/register">Sign Up</a>
+          </ion-text>
+        </div>
+      </form>
+    </div>
+
+    <!-- Tarjeta de notificación -->
+    <div *ngIf="showSuccessMessage" class="success-card">
+      <ion-icon name="checkmark-circle" class="success-icon"></ion-icon>
+      <p>Login Successful!</p>
+      <ion-button fill="clear" (click)="dismissSuccessMessage()">OK</ion-button>
+    </div>
+  </div>
 </ion-content>

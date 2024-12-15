@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegisterPage implements OnInit {
 
   registerForm: FormGroup;
+  showSuccessMessage = false;
 
   constructor(
     private fb: FormBuilder,
@@ -25,8 +26,7 @@ export class RegisterPage implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onRegister() {
     if (this.registerForm.valid) {
@@ -35,11 +35,20 @@ export class RegisterPage implements OnInit {
       this.authService.register(registerData).subscribe(
         response => {
           console.log('Registro exitoso', response);
+          this.showSuccessMessage = true;
+          setTimeout(() => {
+            this.dismissSuccessMessage();
+            this.router.navigate(['/login']);
+          }, 3000);
         },
         error => {
           console.error('Error en el registro', error);
         }
       );
     }
+  }
+
+  dismissSuccessMessage() {
+    this.showSuccessMessage = false;
   }
 }
