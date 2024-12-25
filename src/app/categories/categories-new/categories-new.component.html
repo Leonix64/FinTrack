@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create Category</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()" [disabled]="isLoading">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="categoryForm" (ngSubmit)="submitCategory()">
+    <ion-item>
+      <ion-label position="stacked">Name</ion-label>
+      <ion-input formControlName="name" type="text" placeholder="Enter category name"></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched">
+      <p>Category name is required</p>
+    </ion-text>
+
+    <ion-item>
+      <ion-label position="stacked">Color</ion-label>
+      <ion-input formControlName="color" type="color"></ion-input>
+    </ion-item>
+
+    <ion-footer>
+      <ion-button expand="block" type="submit" [disabled]="categoryForm.invalid || isLoading">
+        <ion-spinner *ngIf="isLoading"></ion-spinner>
+        <span *ngIf="!isLoading">Create Category</span>
+      </ion-button>
+    </ion-footer>
+  </form>
+</ion-content>

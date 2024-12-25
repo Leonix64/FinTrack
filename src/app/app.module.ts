@@ -7,18 +7,21 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Imports
 import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
+import { CategoriesNewComponent } from './categories/categories-new/categories-new.component';
 import { CategoriesEditComponent } from './categories/categories-edit/categories-edit.component';
+
 import { TransactionsListComponent } from './transactions/transactions-list/transactions-list.component';
+import { TransactionsNewComponent } from './transactions/transactions-new/transactions-new.component';
 import { TransactionsEditComponent } from './transactions/transactions-edit/transactions-edit.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, CategoriesListComponent, CategoriesEditComponent, TransactionsListComponent, TransactionsEditComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule],
+  declarations: [AppComponent, CategoriesListComponent, CategoriesNewComponent, CategoriesEditComponent, TransactionsListComponent, TransactionsNewComponent, TransactionsEditComponent],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

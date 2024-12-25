@@ -1,3 +1,57 @@
-<p>
-  transactions-edit works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Update Transaction</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/transactions/list"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [translate]="true">
+    <div>
+        <form [formGroup]="updateTransactionForm" (ngSubmit)="updateTransaction()">
+            <ion-item>
+                <ion-label position="floating">Amount</ion-label>
+                <ion-input type="number" formControlName="amount" placeholder="Enter amount"></ion-input>
+            </ion-item>
+            <div *ngIf="updateTransactionForm.get('amount')?.invalid && updateTransactionForm.get('amount')?.touched" class="error">
+                Amount is required and must be greater than 0.
+            </div>
+
+            <ion-item>
+                <ion-label position="floating">Description</ion-label>
+                <ion-input type="text" formControlName="description"></ion-input>
+            </ion-item>
+            <div *ngIf="updateTransactionForm.get('description')?.invalid && updateTransactionForm.get('description')?.touched" class="error">
+                Description is required and must be at least 3 characters long.
+            </div>
+
+            <ion-item>
+                <ion-label>Category</ion-label>
+                <ion-select formControlName="categoryId">
+                  <ion-select-option *ngFor="let category of categories" [value]="category.id">
+                    <ion-label>
+                      {{ category.name }}
+                    </ion-label>
+                  </ion-select-option>
+                </ion-select>
+            </ion-item>
+            <div *ngIf="updateTransactionForm.get('categoryId')?.invalid && updateTransactionForm.get('categoryId')?.touched" class="error">
+                Please select a category.
+            </div>
+
+            <ion-item>
+                <ion-label position="floating">Date</ion-label>
+                <ion-datetime formControlName="date" displayFormat="MMM D, YYYY"></ion-datetime>
+            </ion-item>
+            <div *ngIf="updateTransactionForm.get('date')?.invalid && updateTransactionForm.get('date')?.touched" class="error">
+                Please provide a valid date.
+            </div>
+
+            <div>
+                <ion-button type="submit" [disabled]="updateTransactionForm.invalid" expand="block">Update</ion-button>
+                <ion-button (click)="cancelUpdate()" expand="block" color="medium">Cancel</ion-button>
+            </div>
+        </form>
+    </div>
+</ion-content>

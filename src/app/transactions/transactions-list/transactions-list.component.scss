@@ -1,0 +1,14 @@
+.category-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .category-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    border: 1px solid #ddd;
+  }
+  

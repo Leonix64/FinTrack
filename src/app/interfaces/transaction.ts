@@ -15,7 +15,7 @@ export interface CreateTransaction {
 }
 
 export interface UpdateTransaction {
-    id: string;
+    id?: string;
     amount?: number;
     description?: string;
     categoryId?: string;

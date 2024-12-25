@@ -35,9 +35,9 @@ export class CategoriesService {
     return this.http.post<Category>(this.categoryUrl, category, { headers });
   }
 
-  updateCategory(category: UpdateCategory): Observable<Category> {
+  updateCategory(category: Partial<UpdateCategory>): Observable<Category> {
     const headers = this.getHeaders();
-    return this.http.put<Category>(`${this.categoryUrl}/${category.id}`, category, { headers });
+    return this.http.patch<Category>(`${this.categoryUrl}/${category.id}`, category, { headers });
   }
 
   deleteCategory(categoryId: string): Observable<void> {
