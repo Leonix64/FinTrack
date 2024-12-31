@@ -30,7 +30,7 @@ export class TransactionsService {
     return this.http.get<Transaction[]>(this.financeUrl, { headers });
   }
 
-  createTransaction(transaction: Transaction): Observable<Transaction> {
+  createTransaction(transaction: CreateTransaction): Observable<Transaction> {
     const headers = this.getHeaders();
     return this.http.post<Transaction>(this.financeUrl, transaction, { headers });
   }

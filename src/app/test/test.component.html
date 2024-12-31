@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">
+      <h1>Hola, Mi Amigo Facil de Dibujar 👋</h1>
+      <p>Tus finanzas al día 📊</p>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <!-- Menu de navegacion -->
+  <div class="menu-navigation">
+    <ion-button fill="clear" href="/profile/:id">
+      <ion-icon name="person-outline" slot="start"></ion-icon>
+      Perfil
+    </ion-button>
+    <ion-button fill="clear" href="/categories/list">
+      <ion-icon name="pricetag-outline" slot="start"></ion-icon>
+      Categorias
+    </ion-button>
+    <ion-button fill="clear" href="/transactions/list">
+      <ion-icon name="cash-outline" slot="start"></ion-icon>
+      Transacciones
+    </ion-button>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" sizeMd="8"></ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Resumen General de Transacciones -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Resumen General de Transacciones</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Total de Transacciones:</strong> {{ generalTransactionSummary.totalTransactions }}</p>
+      <p><strong>Total Gastado:</strong> {{ generalTransactionSummary.totalAmount | currency }}</p>
+      <p><strong>Promedio por Transaccion:</strong> {{ generalTransactionSummary.averageTransaction | currency }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Desglose por Categoria -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Desglose por Categoria</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let category of categoryBreakdown">
+          <ion-label>
+            <h2>{{ category.name }}</h2>
+            <p><strong>Total:</strong> {{ category.total | currency }} | <strong>Promedio:</strong> {{ category.average }}</p>
+          </ion-label>
+          <ion-badge [ngStyle]="{'background-color': category.color}">{{ category.count }} transaccion(es)</ion-badge>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Informacion Mensual -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Informacion Mensual</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item *ngFor="let month of monthlyInsights | keyvalue">
+        <ion-label>
+          <h2>{{ month.key }}</h2>
+          <p><strong>Total Gastado:</strong> {{ month.value.total | currency }} | <strong>Promedio:</strong> {{ month.value.average | currency }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Patron de Gastos Impulsivos -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Patron de Gastos Impulsivos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Total de Gastos Impulsivos:</strong> {{ impulsiveSpending.impulsiveCount }} transacciones</p>
+      <p><strong>Total de Gastos No Impulsivos:</strong> {{ impulsiveSpending.nonImpulsiveCount }} transacciones</p>
+      <p><strong>% de Sentimiento de Culpa:</strong> {{ impulsiveSpending.guiltPercentage }}%</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Comparacion con Otros Usuarios -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Comparacion de Gastos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Total Gastado:</strong> {{ userSpendingComparison.userTotal | currency }}</p>
+      <p><strong>Comparado con el Promedio de Usuarios:</strong> {{ userSpendingComparison.average | currency }}</p>
+      <p><strong>Desviacion:</strong> {{ userSpendingComparison.deviation | currency }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Diversidad de Categorias -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Diversidad de Categorias Usadas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Categorias Usadas:</strong> {{ categoryDiversity.usedCategories }} de {{ categoryDiversity.totalCategories }}</p>
+      <p><strong>% de Diversidad:</strong> {{ categoryDiversity.diversityPercentage }}%</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

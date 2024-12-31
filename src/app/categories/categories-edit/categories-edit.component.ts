@@ -57,7 +57,7 @@ export class CategoriesEditComponent implements OnInit {
       this.CS.updateCategory(updateCategory).subscribe(
         () => {
           console.log('Category updated successfully');
-          this.router.navigate(['/categories']);
+          this.router.navigate(['/categories/list']);
         },
         (err) => {
           console.error('Error updating category', err);

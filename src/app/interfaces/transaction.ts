@@ -1,5 +1,5 @@
 export interface Transaction {
-    id?: string; // Opcional, se genera al crearse
+    id?: string; // Opcional, igual se genera al crearse
     amount: number;
     description: string;
     categoryId: string;

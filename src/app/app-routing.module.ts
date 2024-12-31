@@ -7,6 +7,7 @@ import { CategoriesNewComponent } from './categories/categories-new/categories-n
 import { CategoriesEditComponent } from './categories/categories-edit/categories-edit.component';
 import { TransactionsListComponent } from './transactions/transactions-list/transactions-list.component';
 import { TransactionsEditComponent } from './transactions/transactions-edit/transactions-edit.component';
+import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
     path: 'transactions/edit/:id',
     component: TransactionsEditComponent, canActivate: [AuthGuard]
   },
+  {
+    path: 'test64',
+    component: TestComponent, canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({

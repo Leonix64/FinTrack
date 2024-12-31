@@ -18,8 +18,10 @@ import { TransactionsListComponent } from './transactions/transactions-list/tran
 import { TransactionsNewComponent } from './transactions/transactions-new/transactions-new.component';
 import { TransactionsEditComponent } from './transactions/transactions-edit/transactions-edit.component';
 
+import { TestComponent } from './test/test.component';
+
 @NgModule({
-  declarations: [AppComponent, CategoriesListComponent, CategoriesNewComponent, CategoriesEditComponent, TransactionsListComponent, TransactionsNewComponent, TransactionsEditComponent],
+  declarations: [AppComponent, CategoriesListComponent, CategoriesNewComponent, CategoriesEditComponent, TransactionsListComponent, TransactionsNewComponent, TransactionsEditComponent, TestComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, ReactiveFormsModule, FormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
