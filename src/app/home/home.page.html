@@ -1,19 +1,12 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title class="ion-text-center">
-      <h1>Hola, Mi Amigo Facil de Dibujar 👋</h1>
-      <p>Tus finanzas al día 📊</p>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content [fullscreen]="true" class="ion-padding">
   <!-- Menu de navegacion -->
   <div class="ion-text-center ion-margin-bottom">
-    <ion-button fill="clear" href="/profile/:id">
+    <!-- <ion-button fill="clear" href="/profile/:id">
       <ion-icon name="person-outline" slot="start"></ion-icon>
       Perfil
-    </ion-button>
+    </ion-button> -->
     <ion-button fill="clear" href="/categories/list">
       <ion-icon name="pricetag-outline" slot="start"></ion-icon>
       Categorias
@@ -24,86 +17,110 @@
     </ion-button>
   </div>
 
-  <ion-grid>
+  <!-- Resumen General de Transacciones -->
+  <ion-card class="summary-card animate__animated animate__fadeIn">
+    <ion-card-header>
+      <ion-card-title class="ion-margin-bottom">
+        <ion-icon name="stats-chart-outline" color="primary"></ion-icon>
+        Resumen General
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" class="ion-text-center">
+            <h2 class="counter">{{ generalTransactionSummary.totalTransactions }}</h2>
+            <p class="counter-label">Transacciones</p>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <h2 class="counter">{{ generalTransactionSummary.totalAmount | currency }}</h2>
+            <p class="counter-label">Total Gastado</p>
+          </ion-col>
+          <ion-col size="4" class="ion-text-center">
+            <h2 class="counter">{{ generalTransactionSummary.averageTransaction | currency }}</h2>
+            <p class="counter-label">Promedio</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid class="main-grid">
     <ion-row>
-      <ion-col size="12" size-md="8">
-        <!-- Resumen General de Transacciones -->
-        <ion-card class="animate__animated animate__fadeIn">
+      <!-- Columna izquierda con gráfica mensual -->
+      <ion-col size="12" size-md="6">
+        <ion-card class="chart-card">
           <ion-card-header>
-            <ion-card-title>
-              <ion-icon name="stats-chart-outline" color="primary"></ion-icon>
-              Resumen General
+            <ion-card-title class="chart-title">
+              <ion-icon name="trending-up-outline" color="primary"></ion-icon>
+              Evolución Mensual
             </ion-card-title>
           </ion-card-header>
-          <ion-card-content>
-            <ion-grid>
-              <ion-row>
-                <ion-col size="4" class="ion-text-center">
-                  <h2 class="counter">{{ generalTransactionSummary.totalTransactions }}</h2>
-                  <p>Transacciones</p>
-                </ion-col>
-
-                <ion-col size="4" class="ion-text-center">
-                  <h2 class="counter">{{ generalTransactionSummary.totalAmount | currency }}</h2>
-                  <p>Total Gastado</p>
-                </ion-col>
-
-                <ion-col size="4" class="ion-text-center">
-                  <h2 class="counter">{{ generalTransactionSummary.averageTransaction | currency }}</h2>
-                  <p>Promedio</p>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card-content>
-        </ion-card>
-
-        <!-- Grafica Mensual -->
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Evolucion Mensual</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <canvas #monthlyChart></canvas>
-          </ion-card-content>
-        </ion-card>
-
-        <!-- Desglose por Categoria con Grafica -->
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Distrubucion por Categorias</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <canvas #categoryChart></canvas>
+          <ion-card-content class="chart-content">
+            <div class="chart-container">
+              <canvas #monthlyChart></canvas>
+            </div>
           </ion-card-content>
         </ion-card>
       </ion-col>
 
-      <ion-col size="12" size-md="4">
-        <!-- Gastos Impulsivos con gauge -->
-        <ion-card>
+      <!-- Columna derecha con distribución por categorías -->
+      <ion-col size="12" size-md="6">
+        <ion-card class="chart-card">
           <ion-card-header>
-            <ion-card-title>Gastos Impulsivos</ion-card-title>
+            <ion-card-title class="chart-title">
+              <ion-icon name="pie-chart-outline" color="primary"></ion-icon>
+              Distribución por Categorías
+            </ion-card-title>
           </ion-card-header>
-          <ion-card-content>
-            <canvas #impulsiveChart></canvas>
-            <div class="ion-text-center ion-margin-top">
-              <p>Indice de Control: {{ 100 - impulsiveSpending.guiltPercentage }}%</p>
+          <ion-card-content class="chart-content">
+            <div class="chart-container">
+              <canvas #categoryChart></canvas>
             </div>
           </ion-card-content>
         </ion-card>
+      </ion-col>
+    </ion-row>
 
-        <!-- Diversidad de Categorias -->
-        <ion-card>
+    <!-- Fila inferior con métricas adicionales -->
+    <ion-row>
+      <ion-col size="12" size-md="6">
+        <ion-card class="metrics-card">
           <ion-card-header>
-            <ion-card-title>Diversidad de Gastos</ion-card-title>
+            <ion-card-title class="chart-title">
+              <ion-icon name="flash-outline" color="warning"></ion-icon>
+              Gastos Impulsivos
+            </ion-card-title>
           </ion-card-header>
-          <ion-card-content>
-            <ion-progress-bar [value]="categoryDiversity.diversityPercentage / 100" color="tertiary"
-              class="animate-progress">
-            </ion-progress-bar>
-            <p class="ion-text-center ion-margin-top">
-              {{ categoryDiversity.diversityPercentage }}% de categorias utilizadas
-            </p>
+          <ion-card-content class="metrics-content">
+            <div class="gauge-container">
+              <canvas #impulsiveChart></canvas>
+            </div>
+            <div class="ion-text-center ion-margin-top">
+              <p class="metrics-label">Índice de Control: {{ 100 - impulsiveSpending.guiltPercentage }}%</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-md="6">
+        <ion-card class="metrics-card">
+          <ion-card-header>
+            <ion-card-title class="chart-title">
+              <ion-icon name="apps-outline" color="tertiary"></ion-icon>
+              Diversidad de Gastos
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="metrics-content">
+            <div class="progress-container">
+              <ion-progress-bar [value]="categoryDiversity.diversityPercentage / 100" 
+                              color="tertiary"
+                              class="animate-progress">
+              </ion-progress-bar>
+              <p class="metrics-label ion-margin-top">
+                {{ categoryDiversity.diversityPercentage }}% de categorías utilizadas
+              </p>
+            </div>
           </ion-card-content>
         </ion-card>
       </ion-col>

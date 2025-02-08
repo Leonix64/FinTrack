@@ -1,122 +1,133 @@
 .categories-content {
-  --background: linear-gradient(135deg, #2b2e33 0%, #1c1e22 100%);
+  //--background: #f4f5f8;
+}
+
+.page-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.title-container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
-}
+  gap: 8px;
 
-//   .categories-container {
-//     width: 100%;
-//     max-width: 600px;
-//     padding: 2rem;
-//   }
-
-.custom-header {
-  ion-toolbar {
-    --background: transparent;
-    --color: #f5f5f5;
-  }
-
-  .custom-back-button {
-    --color: #4caf50;
-  }
-
-  .page-title {
-    text-align: center;
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #f5f5f5;
+  ion-icon {
+    font-size: 1.3rem;
   }
 }
 
-.categories-wrapper {
-  background-color: #1e2025;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  padding: 2.5rem;
-  transition: all 0.3s ease;
+.content-container {
+  padding: 16px;
+}
+
+.add-button {
+  margin: 16px 0;
+  --border-radius: 10px;
+  font-weight: 500;
+
+  ion-icon {
+    margin-right: 8px;
+  }
+}
+
+.categories-card {
+  border-radius: 15px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  margin: 8px 0;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 
   &:hover {
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    transform: translateY(-5px);
+  }
+
+  ion-card-content {
+    padding: 0;
   }
 }
 
-.add-category-button {
-  --background: #4caf50;
-  --background-hover: #388e3c;
-  --background-activate: #2e7d32;
-  --color: white;
-  --border-radius: 8px;
-  text-transform: none;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  margin-bottom: 1.5rem;
+ion-list {
+  background: transparent;
+  padding: 0;
 }
 
-.categories-list {
-  background-color: transparent;
+.category-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --background: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .category-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--ion-color-dark);
+    margin-bottom: 8px;
+  }
+
+  .color-preview {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .color-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .color-text {
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+
+  ion-button {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    height: 36px;
+
+    ion-icon {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .content-container {
+    padding: 12px;
+  }
 
   .category-item {
-    --background: #2a2d33;
-    --border-color: #444;
-    --border-radius: 8px;
-    margin-bottom: 1rem;
-    border: 1px solid #444;
-    transition: all 0.3s ease;
+    --padding-start: 12px;
+    --padding-end: 12px;
+  }
 
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    ion-label {
-      margin-right: 1rem;
-
-      .category-name {
-        color: #f5f5f5;
-        font-weight: 500;
-      }
-
-      .category-color {
-        color: #aaa;
-        font-size: 0.9rem;
-      }
-    }
-
-    .category-actions {
-      display: flex;
-      gap: 0.5rem;
-
-      .delete-button,
-      .edit-button {
-        --border-radius: 6px;
-        --color: white;
-        text-transform: none;
-        font-size: 0.8rem;
-      }
-
-      .delete-button {
-        --background: #f44336;
-        --background-hover: #d32f2f;
-      }
-
-      .edit-button {
-        --background: #4caf50;
-        --background-hover: #388e3c;
-      }
-    }
+  .category-name {
+    font-size: 1rem;
   }
 }
 
-// Optional: Add a subtle hover animation
-@keyframes subtleHover {
-  0% {
-    transform: scale(1);
+@media (max-width: 576px) {
+  .content-container {
+    padding: 8px;
   }
-  50% {
-    transform: scale(1.02);
-  }
-  100% {
-    transform: scale(1);
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 4px;
   }
 }

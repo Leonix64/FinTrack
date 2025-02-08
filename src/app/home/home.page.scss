@@ -1,42 +1,125 @@
 ion-content {
-  --background: #f4f5f8;
+  //--background: #f4f5f8;
+}
+
+.main-grid {
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 ion-card {
   border-radius: 15px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
+  margin: 8px;
+  overflow: hidden;
 
   &:hover {
     transform: translateY(-5px);
   }
 }
 
-.counter {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--ion-color-primary);
-  margin: 0;
+// Estilos para los títulos de las tarjetas
+.chart-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.1rem;
+
+  ion-icon {
+    font-size: 1.3rem;
+  }
 }
 
+// Tarjeta de resumen
+.summary-card {
+  max-width: 1400px;
+  margin: 8px auto;
+
+  .counter {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+    margin: 0;
+    animation: countUp 2s ease-out;
+  }
+
+  .counter-label {
+    margin-top: 8px;
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+  }
+}
+
+// Tarjetas de gráficas
+.chart-card {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+
+  .chart-content {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .chart-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+}
+
+// Tarjetas de métricas
+.metrics-card {
+  height: 300px;
+
+  .metrics-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100% - 60px); // Ajuste para el header
+    padding: 16px;
+  }
+
+  .gauge-container {
+    flex: 1;
+    position: relative;
+    min-height: 150px;
+  }
+
+  .progress-container {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .metrics-label {
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+    margin: 8px 0;
+  }
+}
+
+// Barra de progreso
 .animate-progress {
-  height: 10px;
-  border-radius: 5px;
+  height: 12px;
+  border-radius: 6px;
   animation: progressAnimation 1.5s ease-out;
 }
 
+// Animaciones
 @keyframes progressAnimation {
   from {
     transform: scaleX(0);
   }
-
   to {
     transform: scaleX(1);
   }
-}
-
-.counter {
-  animation: countUp 2s ease-out;
 }
 
 @keyframes countUp {
@@ -44,19 +127,41 @@ ion-card {
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+// Media queries
+@media (max-width: 768px) {
+  .chart-card {
+    height: 300px;
+  }
+
+  .metrics-card {
+    height: 250px;
+
+    .gauge-container {
+      min-height: 120px;
+    }
+  }
+}
+
 @media (max-width: 576px) {
-  ion-grid {
-    padding: 0;
+  .chart-card {
+    height: 250px;
+  }
+
+  .metrics-card {
+    height: 200px;
+
+    .gauge-container {
+      min-height: 100px;
+    }
   }
 
   ion-card {
-    margin: 10px 0;
+    margin: 8px 4px;
   }
 }

@@ -90,7 +90,50 @@ export class HomePage {
     this.charts.forEach(chart => chart.destroy());
     this.charts = [];
 
-    // Grafica de categorias (Donut)
+    // Configuración de la gráfica mensual (Line)
+    const monthlyCtx = this.monthlyChart.nativeElement.getContext('2d');
+    const monthlyData = Object.entries(this.monthlyInsights).map(([month, data]) => ({
+      month,
+      total: data.total
+    }));
+
+    this.charts.push(new Chart(monthlyCtx, {
+      type: 'line',
+      data: {
+        labels: monthlyData.map(d => d.month),
+        datasets: [{
+          label: 'Gastos Mensuales',
+          data: monthlyData.map(d => d.total),
+          borderColor: '#3880FF',
+          tension: 0.4,
+          fill: true,
+          backgroundColor: 'rgba(56, 128, 255, 0.1)',
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
+      }
+    }));
+
+    // Configuración de la gráfica de categorías (Donut)
     const categoryCtx = this.categoryChart.nativeElement.getContext('2d');
     this.charts.push(new Chart(categoryCtx, {
       type: 'doughnut',
@@ -103,60 +146,20 @@ export class HomePage {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             position: 'right',
-          },
-          title: {
-            display: true,
-            text: 'Distribución por Categorías'
+            align: 'center'
           }
         },
-        animation: {
-          animateRotate: true,
-          animateScale: true
+        layout: {
+          padding: 20
         }
       }
     }));
 
-    // Grafica mensual (Line)
-    const monthlyCtx = this.monthlyChart.nativeElement.getContext('2d');
-    const monthlyData = Object.entries(this.monthlyInsights).map(([month, data]) => ({ month, total: data.total }));
-
-    this.charts.push(new Chart(monthlyCtx, {
-      type: 'line',
-      data: {
-        labels: monthlyData.map(d => d.month),
-        datasets: [{
-          label: 'Gastos Mensuales',
-          data: monthlyData.map(d => d.total),
-          borderColor: '#3880FF',
-          //borderColor: 'rgb(75, 192, 192)',
-          tension: 0.4,
-          fill: true,
-          backgroundColor: 'rgba(56, 128, 255, 0.1)',
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        },
-        animation: {
-          duration: 2000,
-          easing: 'easeInOutQuart'
-        }
-      }
-    }));
-
-    // Grafica de impulsividad (Gauge)
+    // Configuración del gauge de impulsividad
     const impulsiveCtx = this.impulsiveChart.nativeElement.getContext('2d');
     const total = this.impulsiveSpending.impulsiveCount + this.impulsiveSpending.nonImpulsiveCount;
     const impulsivePercentage = (this.impulsiveSpending.impulsiveCount / total) * 100;
@@ -173,18 +176,14 @@ export class HomePage {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             display: false
-          },
-          title: {
-            display: true,
-            text: 'Indice de Gastos Impulsivos'
           }
         },
-        animation: {
-          animateRotate: true,
-          animateScale: true
+        layout: {
+          padding: 10
         }
       }
     }));
